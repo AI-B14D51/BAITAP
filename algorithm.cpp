@@ -84,7 +84,7 @@ int main()
     end = clock();
 
     double time_taken_bfs = double(end - start) / double(CLOCKS_PER_SEC);
-    fout << "Time taken by dfs is: " << fixed << time_taken_dfs << setprecision(6);
+    fout << "Time taken by bfs is: " << fixed << time_taken_bfs << setprecision(6);
     fout << " sec" << endl;
     cout << "Time taken by bfs is: " << fixed << time_taken_bfs << setprecision(6);
     cout << " sec" << endl;
