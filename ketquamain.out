@@ -1,0 +1,12 @@
+BFS
+Duong di ngan nhat tu 0 den 12 la
+12<=10<=9<=3<=0
+Do dai duong di la : 418
+Thoi gian chay BFS: 0.001 s
+
+
+DFS
+Duong di ngan nhat tu 0 den 12 la
+0=>3=>9=>10=>12
+Do dai duong di la : 418
+Thoi gian chay DFS: 0.001 s
