@@ -27,6 +27,28 @@ int d[max];
 int check[max];
 vector<ii> graphbfs[max];
 
+struct AllocationMetrics{
+    uint32_t TotalAllocated = 0;
+    uint32_t TotalFreed = 0;
+
+    uint32_t CurrentUsage() { return TotalAllocated - TotalFreed; }
+};
+
+static AllocationMetrics s_AllocationMetrics;
+
+void* operator new(size_t size) {
+    s_AllocationMetrics.TotalAllocated += size;
+    return malloc(size);
+}
+
+void operator delete(void* memory, size_t size) {
+    s_AllocationMetrics.TotalFreed += size;
+    free(memory);
+}
+
+static void PrintMemoryUsage(){
+    fout << "\nMemory Usage: " << s_AllocationMetrics.CurrentUsage() << " bytes\n";
+}
 void bfs(int root)
 {
     priority_queue<ii, vector<ii>, greater<ii> > road;
@@ -151,6 +173,7 @@ int main()
 
     fout << "Time taken by dfs is: " << fixed << time_taken_dfs << setprecision(6);
     fout << " sec" << endl;
+    PrintMemoryUsage();
     memset(visited, false, sizeof(visited));
 
     start = clock();
@@ -163,4 +186,5 @@ int main()
     fout << " sec" << endl;
     cout << "Time taken by bfs is: " << fixed << time_taken_bfs << setprecision(6);
     cout << " sec" << endl;
+    PrintMemoryUsage();
 }
