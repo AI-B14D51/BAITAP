@@ -1,2 +1,14 @@
-Time taken by dfs is: 0.000002 sec
-Time taken by dfs is: 0.000002 sec
+BFS
+Duong di ngan nhat tu 0 den 12 la
+12<=11<=9<=4<=0
+Do dai duong di la : 418
+Duration time BFS: 0.117 miliseconds
+Memory Usage: 60400 bytes
+
+
+DFS
+Duong di ngan nhat tu 0 den 12 la
+0=>4=>9=>11=>12
+Do dai duong di la : 418
+Duration time DFS: 0.056 miliseconds
+Memory Usage: 68768 bytes

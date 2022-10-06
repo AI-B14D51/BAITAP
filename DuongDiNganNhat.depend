@@ -1,0 +1,7 @@
+# depslib dependency file v1.0
+1664899874 source:/home/huuhieu/TTNT/DuongDiNganNhat/main.cpp
+	<iostream>
+	<fstream>
+	<time.h>
+	<vector>
+
