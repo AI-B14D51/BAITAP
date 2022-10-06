@@ -1,2 +1,5 @@
-Time taken by dfs is: 0.000002 sec
-Time taken by dfs is: 0.000002 sec
+DFS
+Path : 
+1 => 4 => 7 => 13
+Length : 450Time taken by dfs is: 0.000080 sec
+Time taken by bfs is: 0.000009 sec
