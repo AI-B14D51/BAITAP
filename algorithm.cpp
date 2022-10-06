@@ -5,9 +5,14 @@
 #include <time.h>
 #include <cstring>
 #include <memory>
+#include <utility>
 #define max 1000
+#define maxr 9999999
+#define fi first
+#define se second
 
 using namespace std;
+typedef pair<int, int> ii;
 
 fstream fin, fout;
 vector<int> graph[max];
@@ -18,25 +23,36 @@ int n, k = 1, destination = 13;
 vector<int> result;
 int length_road = INT32_MAX;
 queue<int> g;
+int d[max];
+int check[max];
+vector<ii> graphbfs[max];
 
-void bfs()
+void bfs(int root)
 {
-    g.push(k);
-    visited[k] = true;
-    while (!g.empty())
+    priority_queue<ii, vector<ii>, greater<ii> > road;
+    for (int i = 0; i <= n; i++)
     {
-        int u = g.front();
-        g.pop();
+        d[i] = maxr;
+    }
+    d[root] = 0;
+    road.push(ii(root, 0));
+    while (!road.empty())
+    {
+        ii top = road.top();
+        road.pop();
+        int u = top.fi;
+        if (d[u] != top.se)
+            continue;
+
         for (int i = 0; i < graph[u].size(); i++)
         {
-            int v = graph[u][i];
-            if (!visited[v])
+            int v = graphbfs[u][i].fi;
+            int uv = graphbfs[u][i].se;
+            if (d[v] > d[u] + uv)
             {
-                visited[v] = true;
-                if (visited[destination])
-
-                    return;
-                g.push(v);
+                d[v] = d[u] + uv;
+                road.push(ii(v, d[v]));
+                check[v] = u;
             }
         }
     }
@@ -48,29 +64,38 @@ int sum_of_mark()
     {
         res += matrix[mark[i]][mark[i + 1]];
     }
-    return res;
+    return res + matrix[mark[mark.size() - 1]][destination];
 }
-
+void print_bfs(){
+ 
+ fout << "BFS\n";
+ fout << "Path : " << endl;
+ fout << destination << " <= ";
+ int i = check[destination];
+ while (i != 1){
+  fout<<i<<" <= ";
+  i = check[i];
+ }
+ fout << "1";
+ fout << endl<<"Length : "<< d[13] << endl;
+}
 void print_result_dfs()
 {
     fout << "DFS" << endl;
-    fout << "Path : " << endl
-         << "1 => ";
+    fout << "Path : " << endl;
     for (int i = 0; i < result.size(); i++)
         fout << result[i] << " => ";
     fout << destination << endl;
-    fout << "Length : " << length_road + matrix[1][result[0]] + matrix[result[result.size() - 1]][destination] << endl;
+    fout << "Length : " << length_road << endl;
 }
 void dfs(int vt)
 {
-    visited[vt] = true;
-
     for (int i = 0; i < graph[vt].size(); i++)
     {
         int v = graph[vt][i];
         if (!visited[v])
         {
-
+            visited[v] = true;
             if (v == destination)
             {
                 int distance = sum_of_mark();
@@ -79,6 +104,7 @@ void dfs(int vt)
                     length_road = distance;
                     result = mark;
                 }
+                visited[v] = false;
             }
             else
             {
@@ -102,6 +128,9 @@ int main()
         fin >> x >> y >> z;
         graph[x].push_back(y);
         graph[y].push_back(x);
+        graphbfs[x].push_back(make_pair(y, z));
+        graphbfs[y].push_back(make_pair(x, z));
+
         matrix[x][y] = z;
         matrix[y][x] = z;
     }
@@ -109,6 +138,8 @@ int main()
     clock_t start, end;
 
     start = clock();
+    mark.push_back(1);
+    visited[1] = true;
     dfs(1);
     print_result_dfs();
     end = clock();
@@ -123,7 +154,8 @@ int main()
     memset(visited, false, sizeof(visited));
 
     start = clock();
-    bfs();
+    bfs(1);
+    print_bfs();
     end = clock();
 
     double time_taken_bfs = double(end - start) / double(CLOCKS_PER_SEC);

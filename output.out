@@ -1,5 +1,10 @@
 DFS
 Path : 
-1 => 4 => 7 => 13
-Length : 450Time taken by dfs is: 0.000080 sec
-Time taken by bfs is: 0.000009 sec
+1 => 4 => 8 => 12 => 13
+Length : 418
+Time taken by dfs is: 0.000093 sec
+BFS
+Path : 
+13 <= 12 <= 8 <= 4 <= 1
+Length : 418
+Time taken by bfs is: 0.000039 sec
