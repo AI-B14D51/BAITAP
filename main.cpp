@@ -9,12 +9,14 @@ using namespace std;
 #define MAX 100
 #define TRUE 1
 #define FALSE 0
-#define MAXN 10000000
+#define MAXN 999999
+
 fstream fin, fout;
 int n; // số đỉnh của đồ thị.
 int s; //đỉnh đầu.
 int t; //đỉnh cuối
 char chon;
+
 vector<int> d(MAX, 0);     // mảng đánh dấu khoảng cách.
 vector<int> truoc(MAX, 0); // mảng đánh dấu đường đi.
 // int Matrix[MAX][MAX];//ma trận trọng số
@@ -49,7 +51,7 @@ static void PrintMemoryUsage()
 
 void Init()
 {
-    fin.open("map.txt", ios::in);
+    fin.open("map_in.txt", ios::in);
     fin >> n >> s >> t;
     for (int i = 0; i < n; i++)
         for (int j = 0; j < n; j++)
@@ -66,8 +68,8 @@ void Init()
 
 void ResultBFS()
 {
-    fout.open("ketqua.txt", ios::out | ios::trunc);
-    fout << "BFS result:\n";
+    fout.open("result.txt", ios::out | ios::trunc);
+    fout << "Kết quả BFS như sau:\n";
     fout << t << "<--"; 
     int i = truoc[t];
     while (i != s)
@@ -77,7 +79,7 @@ void ResultBFS()
     }
     fout << s; 
     fout << endl
-         << "Dmin : " << d[t];
+         << "Quãng đường nhỏ nhất : " << d[t];
 }
 
 void BFS()
@@ -130,7 +132,7 @@ int main()
     clock_t end = clock();
     double time_taken = ((double)(end - start)) / CLOCKS_PER_SEC;
     fout << "\n"
-         << "Execution time: " << time_taken * 1000 << " miliseconds";
+         << "Thời gian thực thi: " << time_taken * 1000 << " ms";
     PrintMemoryUsage();
     fout.close();
     return 0;

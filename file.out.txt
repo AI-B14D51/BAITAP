@@ -1,0 +1,4 @@
+Đường đi ngắn nhất từ 0 -> 12 : 
+12 <- 10 <- 9 <- 3 <- 0
+Độ dài đường đi là : 418
+Thoi gian chay : 0.001 s

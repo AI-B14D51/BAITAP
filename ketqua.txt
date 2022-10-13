@@ -1,5 +1,0 @@
-BFS result:
-13<--11<--8<--3<--0
-Dmin : 396
-Execution time: 0 miliseconds
-Memory Usage: 42800 bytes

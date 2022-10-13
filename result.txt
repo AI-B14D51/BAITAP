@@ -1,0 +1,5 @@
+BFS result:
+13<--11<--8<--3<--0
+Quãng đường nhỏ nhất : 396
+Thời gian thực thi: 0 ms
+Memory Usage: 42800 bytes
